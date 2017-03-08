@@ -8,7 +8,7 @@ If you want to use the neural network for yourself you'll need to include the fo
 
 A pseudo-code for initializing and training the NN would look like this:
 
-	NeuralNetwork *NN = new NeuralNetwork(inSize, hiddenLayerCnt, labelCnt);
+	NeuralNetwork *NN = new NeuralNetwork(inSize, hiddenLayerSizesVector, labelCnt);
 	
 	shuffleTrainSamples();
 
