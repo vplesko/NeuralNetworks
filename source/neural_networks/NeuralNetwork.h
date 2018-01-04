@@ -25,11 +25,12 @@ class NeuralNetwork {
 
 	void addCost(std::vector<bool> labels);
 
+	// for debugging
 	//double getTotalCost() const;
 	//void gradientChecking(std::vector<bool> labels);
 
 public:
-	// it is allowed to have no hidden layers, then this becomes logistic regression
+	// it is allowed to have no hidden layers
 	NeuralNetwork(unsigned numOfInputs, std::vector<unsigned> hiddenLayerSizes, unsigned numOfOutputs);
 	explicit NeuralNetwork(const std::string &fileName);
 
@@ -46,7 +47,7 @@ public:
 	void feedforward();
 
 	// set input before calling
-	// labels present whether the output should be 1.0 (true) or 0.0 (false)
+	// labels present whether the correct output is 1 (on true) or 0 (on false)
 	void backpropagation(std::vector<bool> labels);
 	
 	// pseudo code for batch gradient descent training:

@@ -24,7 +24,6 @@ public:
 
 	void allTo(double v = 0.0);
 
-	// it's possible that there's a bug with these two!
 	double operator()(unsigned i, unsigned j = 0) const { return vals[i][j]; }
 	double& operator()(unsigned i, unsigned j = 0) { return vals[i][j]; }
 	
