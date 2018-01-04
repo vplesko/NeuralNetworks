@@ -1,33 +1,44 @@
 # Neural Networks
 
-Student project in data mining. Contains classes for creating and storing a neural network model. The program uses them to analyze data taken from http://yann.lecun.com/exdb/mnist.
+An implementation of feedforward neural networks in C++. NeuralNetwork class can be initiated with a desired architecture, trained on a set of data and then used on real examples.
 
-This neural network outputs confidences as a number from 0 to 1 for each possible output label.
+This implementation uses neural networks for categorization problems. It outputs a number from 0 to 1 for each category, representing a confidence for that category. Sigmoid function is used as activation function and gradient descent as optimizer.
 
-If you want to use the neural network for yourself you'll need to include the following files into your project: Matrix.h, Matrix.cpp, NeuralNetwork.h and NeuralNetwork.cpp.
+Also included is an example usage for analyzing the MNIST database. MNIST is a popular dataset of handwritten digits. You can learn more about it here: http://yann.lecun.com/exdb/mnist
 
-A pseudo-code for initializing and training the NN would look like this:
+This project is primarily intended for educational purposes, as real machine learning applications use enormous amounts of data and need infrastructures with good performance to support them.
 
-	NeuralNetwork *NN = new NeuralNetwork(inSize, hiddenLayerSizesVector, labelCnt);
-	
-	shuffleTrainSamples();
+## How to use
 
-	repeat (cycleCnt) {
-		// you may use batch, mini-batch or stochastic gradient descent as you will
+All needed files are under *source/neural_networks*. Include these in your project. What you will get are two classes: Matrix (for linear algebra calculations) and NeuralNetwork (which you will use).
+
+NeuralNetwork can then be initialized and trained like this:
+
+	NeuralNetwork *NN = new NeuralNetwork(inputLayerSize, vectorOfHiddenLayerSizes, outputCategoryCount);
 		
-		foreach (TrainSample T) {
-			for (i : 0 to inSize) NN->setInput(i, T.input[i]);
+	shuffleTrainSamplesSet();
+
+	for (int i = 0; i < numberOfTrainEpochs; ++i) {
+		for (TrainSample trainSample : trainSet) {
+			for (int j = 0; j < inputLayerSize; ++j)
+				NN->setInput(j, trainSample.inputVector[j]);
 			
-			// labels as bool values
-			NN->backpropagation(T.labels);
+			// output labels as bool values
+			NN->backpropagation(trainSample.correctOutputVector);
 		}
 		
 		NN->gradientDescentStep();
 	}
 
-Running this NN can then be done as:
+After training, use them on real or test samples like this:
 
-	for (i : 0 to inSize) NN->setInput(i, input[i]);
+	for (int i = 0; i < inputLayerSize; ++i)
+		NN->setInput(i, sampleInputVector[i]);
 	NN->feedforward();
 	
-	for (i : 0 to labelCnt) labelConfidence[i] = NN->getOutput(i);
+	for (int i = 0; i < outputCategoryCount; ++i)
+		categoryConfidence[i] = NN->getOutput(i);
+
+## MNIST example
+
+Under *source/example_usage* is a program which uses this implementation of neural networks on MNIST database (files in *MNIST* folder). This program will read train and test sets, train a neural network and test and print its accuracy achieved on the test set.
