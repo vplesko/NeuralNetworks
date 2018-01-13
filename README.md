@@ -2,7 +2,7 @@
 
 An implementation of feedforward neural networks in C++. NeuralNetwork class can be initiated with a desired architecture, trained on a set of data and then used on real examples.
 
-This implementation uses neural networks for categorization problems. It outputs a number from 0 to 1 for each category, representing a confidence for that category. Sigmoid function is used as activation function and gradient descent as optimizer.
+This implementation uses neural networks for categorization problems. It outputs a number from 0 to 1 for each category, representing a confidence for that category. Sigmoid function is used as activation function and gradient descent as optimizer. Regularization is used as a measure against overfitting.
 
 Also included is an example usage for analyzing the MNIST database. MNIST is a popular dataset of handwritten digits. You can learn more about it here: http://yann.lecun.com/exdb/mnist
 
